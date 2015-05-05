@@ -10,7 +10,8 @@ var AppConstants = keymirror({
   TOGGLE_AGREEMENT : null,
   TRY_TO_SIGNUP : null,
   TOGGLE_FIELD : null,
-  SAVE_NEW_CODE : null
+  SAVE_NEW_CODE : null,
+  GOTO_PERSONAL_PAGE : null,
 });
 
 module.exports = AppConstants;

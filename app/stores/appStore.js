@@ -14,7 +14,15 @@ var CHANGE_EVENT    = 'change',
     LOGOUT_EVENT    = 'logout',
     USER_AUTH_EVENT = 'user_auth',
     ERROR_EVENT     = 'error',
-    CODE_SAVED_EVENT = 'code_saved';
+    CODE_SAVED_EVENT = 'code_saved',
+    MY_LINKS_FETCHED = 'my_links_fetched',
+    PERSONAL_PAGE_EVENT = "personalPage"
+
+
+var _fetchedLinks = {
+  links: []
+};
+
 
 // states and props
 var _app = {
@@ -46,6 +54,7 @@ function fetchUser() {
 
   });
 }
+
 
 function userLogout() {
   return new Promise(function(resolve, reject) {
@@ -103,6 +112,36 @@ function setCurrentUser(user) {
   _app.currentUser = user;
 }
 
+//personal page
+function fetchMyLinksAJAX(fetchParams){
+  return new Promise(function(resolve, reject) {
+      var user = {
+        username: 'Test User',
+        links:['digitial sea', 'amazon prime','sidecare','flywheel']
+      }
+      setCurrentUser(user);
+      resolve(user);
+    /*******************************************
+    $.ajax({
+      method : 'GET',
+      url    : '/some-api-endpoint-to-get-user'
+    }).done(function(resp) {
+      setCurrentUser(resp);
+      resolve(resp);
+    }).fail(function(resp) {
+      _app.userState = false;
+      reject(Error(resp.responseJSON.error));
+    });
+    */
+
+  });
+}
+
+//
+
+
+
+
 var AppStore = assign({}, EventEmitter.prototype, {
 
   getCurrentUserOnStart: function() {
@@ -152,7 +191,32 @@ var AppStore = assign({}, EventEmitter.prototype, {
   removeCodeSavedListener: function(callback) {
     this.removeListener(CODE_SAVED_EVENT, callback);
   },
+  addPersonalPageListener: function(callback) {
+    this.on(PERSONAL_PAGE_EVENT, callback);
+  },
 
+  getfetchedLinks: function() {
+    return _fetchedLinks;
+  },
+
+//personal profile page===========
+  fetchMyLinks: function(fetchParams) {
+    console.log("******************************* FETCH MY LINKS**********");
+    fetchMyLinksAJAX(fetchParams).then(function(resp) {
+      AppStore.emit(MY_LINKS_FETCHED);
+    }, function(resp) {
+       errorHandler(resp, function() {
+      });
+    });
+  },
+
+  addOnGetLinksListener: function(callback) {
+    this.on(MY_LINKS_FETCHED, callback);
+  },
+
+  removeOnGetLinksListener: function(callback) {
+    this.removeListener(MY_LINKS_FETCHED, callback);
+  }
 });
 
 Dispatcher.register(function(action) {
@@ -184,6 +248,10 @@ Dispatcher.register(function(action) {
         AppStore.emit(CODE_SAVED_EVENT);
       }, errorHandler); 
 
+      break;
+
+    case constants.GOTO_PERSONAL_PAGE:
+      AppStore.emit(PERSONAL_PAGE_EVENT)
       break;
     default: break;
   }

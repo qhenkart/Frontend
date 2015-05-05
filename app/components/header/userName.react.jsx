@@ -11,10 +11,14 @@ var appActions = require('../../actions/appActions');
 
 var UserName = React.createClass({
 
+
   render: function() {
     var username  = this.props.user.username || false;
     return(
       <DropdownButton title={username}>
+        <MenuItem eventKey='personalPage' onClick={this._onUserDropDownClick.bind(this,'personalPage')} header={true} className='b-menu-item'>
+          <span>Profile</span>
+        </MenuItem>
         <MenuItem eventKey='logout' onClick={this._onUserDropDownClick.bind(this,'logout')} header={true} className='b-menu-item'>
           <span>Log Out</span>
         </MenuItem>
@@ -27,6 +31,10 @@ var UserName = React.createClass({
     switch(eventKey) {
       case 'logout': 
         appActions.logout();
+        break;
+      case 'personalPage':
+        appActions.personalPage();
+        
         break;
       default: break;
     }

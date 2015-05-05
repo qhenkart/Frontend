@@ -33,6 +33,12 @@ var AppActions = {
       type : constants.APP_DELETE
     });
   },
+
+  personalPage: function(){
+    Dispatcher.dispatch({
+      type : constants.GOTO_PERSONAL_PAGE
+    });
+  }
 };
 
 module.exports = AppActions;

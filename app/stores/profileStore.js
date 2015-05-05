@@ -42,7 +42,6 @@ function fetchAllLinksAJAX(fetchParams) {
   });
 }
 
-
 var ProfileStore = assign({}, EventEmitter.prototype, {
 
   getfetchedLinks: function() {

@@ -13,6 +13,7 @@ var Master      = require('../components/master.react.jsx');
 var SignUp      = require('../components/pages/signup/signup.react.jsx');
 var ProfilePage = require('../components/pages/profile/profilePage.react.jsx');
 var addCode = require('../components/pages/addCode/addCodePage.react.jsx');
+var PersonalPage = require('../components/pages/personalPage/personalPage.react.jsx');
 
 var AppRoutes = (
   <Route name='root' path='/' handler={Master}>
@@ -20,6 +21,7 @@ var AppRoutes = (
     <Route name='register' handler={SignUp}/>
     <Route name='addCode' path='addCode' handler={addCode}/>
     <Route name='profile' path='profile' handler={ProfilePage}/>
+    <Route name='personalPage' path='personalPage' handler={PersonalPage}/>
     <NotFoundRoute handler={SignUp}/>
   </Route>
 );

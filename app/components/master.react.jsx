@@ -49,6 +49,7 @@ var Master = React.createClass({
     // call back into the lister, the when userAuth --> _.onUserAuth will run
     AppStore.addUserAuthListener(this._onUserAuth);
     AppStore.addLogoutListener(this._onLogout);
+    AppStore.addPersonalPageListener(this._onPersonalPage)
 
   },
 
@@ -97,6 +98,9 @@ var Master = React.createClass({
       this.transitionTo('/');       
     });
   },
+  _onPersonalPage: function(){
+    this.transitionTo('personalPage');
+  }
 
 });
 
