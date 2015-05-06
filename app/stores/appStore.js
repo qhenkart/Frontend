@@ -35,7 +35,7 @@ function fetchUser() {
   return new Promise(function(resolve, reject) {
       var user = {
         username: 'Test User',
-        links:['digitial ocean', 'amazon aws','uber','lyft']
+        links:['amazon aws','uber','lyft']
       }
       setCurrentUser(user);
       resolve(user);
@@ -201,22 +201,36 @@ var AppStore = assign({}, EventEmitter.prototype, {
 
 //personal profile page===========
   fetchMyLinks: function(fetchParams) {
-    console.log("******************************* FETCH MY LINKS**********");
-    fetchMyLinksAJAX(fetchParams).then(function(resp) {
-      AppStore.emit(MY_LINKS_FETCHED);
-    }, function(resp) {
-       errorHandler(resp, function() {
-      });
+    return new Promise(function(resolve, reject) {
+      var user = {
+        username: 'Test User',
+        links:['digitial sea', 'amazon prime','sidecare','flywheel']
+      }
+      setCurrentUser(user);
+      resolve(user);
+    /*******************************************
+    $.ajax({
+      method : 'GET',
+      url    : '/some-api-endpoint-to-get-user'
+    }).done(function(resp) {
+      setCurrentUser(resp);
+      resolve(resp);
+    }).fail(function(resp) {
+      _app.userState = false;
+      reject(Error(resp.responseJSON.error));
     });
-  },
-
-  addOnGetLinksListener: function(callback) {
-    this.on(MY_LINKS_FETCHED, callback);
-  },
-
-  removeOnGetLinksListener: function(callback) {
-    this.removeListener(MY_LINKS_FETCHED, callback);
+    */
+    });
   }
+
+
+  // addOnGetLinksListener: function(callback) {
+  //   this.on(MY_LINKS_FETCHED, callback);
+  // },
+
+  // removeOnGetLinksListener: function(callback) {
+  //   this.removeListener(MY_LINKS_FETCHED, callback);
+  // }
 });
 
 Dispatcher.register(function(action) {

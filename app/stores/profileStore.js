@@ -46,7 +46,7 @@ var ProfileStore = assign({}, EventEmitter.prototype, {
 
   getfetchedLinks: function() {
     return _fetchedLinks;
-  },
+  }, 
 
   fetchAllLinks: function(fetchParams) {
     console.log("******************************* FETCH ALL LINKS**********");
